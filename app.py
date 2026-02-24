@@ -1,12 +1,8 @@
-============================================
-
-表記便覧・文書事務手引ベース 文書チェックアプリ
-
-Streamlit で動作
-
-============================================
-
-import streamlit as st import pandas as pd import re from datetime import datetime import pytesseract from pdf2image import convert_from_bytes import io
+import streamlit as st
+import pandas as pd
+import re
+from datetime こう？import datetime
+import pytesseract from pdf2image import convert_from_bytes import io
 
 st.title("📘 表記便覧・文書事務手引 文書チェックアプリ")
 
@@ -20,8 +16,10 @@ st.sidebar.header("① ルール設定")
 
 hyoki_file = st.sidebar.file_uploader("表記便覧Excel（正表記・NG表記）", type=["xlsx"])
 
-rules = None if hyoki_file: rules = pd.read_excel(hyoki_file) st.sidebar.success(f"ルール読込: {len(rules)}件")
-
+rules = None
+if hyoki_file:
+    rules = pd.read_excel(hyoki_file)
+    st.sidebar.success(f"ルール読込: {len(rules)}件")
 =========================
 
 文書アップロード
