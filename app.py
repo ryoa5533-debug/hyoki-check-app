@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 import re
-from datetime こう？import datetime
-import pytesseract from pdf2image import convert_from_bytes import io
+from datetime import datetime
+import pytesseract
+from pdf2image import convert_from_bytes
+import io 
 
 st.title("📘 表記便覧・文書事務手引 文書チェックアプリ")
 
