@@ -122,7 +122,32 @@ def number_check(text):
 
 # =========================
 
-if st.button("③ チェック実行"): if uploaded and rules is not None: bytes_data = uploaded.read()
+if st.button("③ チェック実行"):
+
+    if uploaded and rules is not None:
+
+        bytes_data = uploaded.read()
+
+        if uploaded.type == "application/pdf":
+            text = ocr_pdf(bytes_data)
+        else:
+            text = ocr_image(bytes_data)
+
+        st.subheader("抽出テキスト")
+        st.text_area("", text, height=200)
+
+        st.subheader("④ チェック結果")
+
+        res = []
+        res += hyoki_check(text, rules)
+        res += weekday_check(text)
+        res += number_check(text)
+
+        if res:
+            for r in res:
+                st.warning(r)
+        else:
+            st.success("問題なし")
 
 if uploaded.type == "application/pdf":
         text = ocr_pdf(bytes_data)
