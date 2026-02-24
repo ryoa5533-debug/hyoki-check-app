@@ -78,7 +78,20 @@ def weekday_check(text):
 
 # =========================
 
-def hyoki_check(text, rules_df): results = [] for _, row in rules_df.iterrows(): if pd.notna(row.get("NG表記")): if row["NG表記"] in text: results.append(f"表記違反: {row['NG表記']} → {row['正表記']}") return results
+def hyoki_check(text, rules_df):
+    results = []
+
+    if rules_df is None:
+        return results
+
+    for _, r in rules_df.iterrows():
+        ng = str(r[0])
+        ok = str(r[1])
+
+        if ng in text:
+            results.append(f"{ng} → {ok}")
+
+    return results
 
 # =========================
 
