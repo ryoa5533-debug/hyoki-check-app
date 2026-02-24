@@ -38,9 +38,12 @@ OCR関数
 
 # =========================
 
-def ocr_pdf(file_bytes): images = convert_from_bytes(file_bytes) text = "" for img in images: text += pytesseract.image_to_string(img, lang="jpn") return text
-
-def ocr_image(file_bytes): from PIL import Image img = Image.open(io.BytesIO(file_bytes)) return pytesseract.image_to_string(img, lang="jpn")
+def ocr_pdf(file_bytes):
+    images = convert_from_bytes(file_bytes)
+    text = ""
+    for img in images:
+        text += pytesseract.image_to_string(img, lang="jpn")
+    return text
 
 # =========================
 
