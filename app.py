@@ -51,7 +51,26 @@ def ocr_pdf(file_bytes):
 
 # =========================
 
-def weekday_check(text): results = [] pattern = r"(\d{4}/\d{1,2}/\d{1,2})（([）)]" for m in re.finditer(pattern, text): date_str = m.group(1) w = m.group(2) try: d = datetime.strptime(date_str, "%Y/%m/%d") correct = "月火水木金土日"[d.weekday()] if w != correct: results.append(f"曜日誤り: {date_str}({w}) → {correct}") except: pass return results
+def weekday_check(text):
+    results = []
+    pattern = r"(\d{4}/\d{1,2}/\d{1,2})（([月火水木金土日])）"
+
+    import re
+    from datetime import datetime
+
+    for m in re.finditer(pattern, text):
+        date_str = m.group(1)
+        w = m.group(2)
+
+        try:
+            d = datetime.strptime(date_str, "%Y/%m/%d")
+            real = "月火水木金土日"[d.weekday()]
+            if real != w:
+                results.append(f"{date_str}（{w}）→ 正:{real}")
+        except:
+            pass
+
+    return results
 
 # =========================
 
