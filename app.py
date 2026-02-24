@@ -99,7 +99,22 @@ def hyoki_check(text, rules_df):
 
 # =========================
 
-def number_check(text): nums = re.findall(r"[①②③④⑤⑥⑦⑧⑨⑩]", text) order = "①②③④⑤⑥⑦⑧⑨⑩" results = [] for i in range(len(nums)-1): if order.index(nums[i+1]) - order.index(nums[i]) != 1: results.append(f"番号飛び: {nums[i]} → {nums[i+1]}") return results
+def number_check(text):
+    results = []
+
+    nums = re.findall(r"[①②③④⑤⑥⑦⑧⑨⑩]", text)
+    order = "①②③④⑤⑥⑦⑧⑨⑩"
+
+    prev = -1
+    for n in nums:
+        idx = order.find(n)
+
+        if prev != -1 and idx != prev + 1:
+            results.append(f"{order[prev]}の次が{n}")
+
+        prev = idx
+
+    return results
 
 # =========================
 
